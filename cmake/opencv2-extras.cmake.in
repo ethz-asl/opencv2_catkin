@@ -1,9 +1,3 @@
-find_package(OpenCV)
-#      - OpenCV_LIBS                     : The list of libraries to links against.
-#      - OpenCV_LIB_DIR                  : The directory(es) where lib files are. Calling LINK_DIRECTORIES
-#                                          with this path is NOT needed.
-#      - OpenCV_INCLUDE_DIRS             : The OpenCV include directories.
-
-set(opencv2_catkin_LIBRARY_DIRS ${OpenCV_LIB_DIR})
-set(opencv2_catkin_LIBRARIES ${OpenCV_LIBS})
-set(opencv2_catkin_INCLUDE_DIRS ${OpenCV_INCLUDE_DIRS})
+# This overrides the dependency tracker with the opencv library file.
+file(GLOB OpenCvLibraries @CATKIN_DEVEL_PREFIX@/lib/libopencv_*)
+set( @PROJECT_NAME@_LIBRARIES ${OpenCvLibraries})
