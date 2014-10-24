@@ -30,6 +30,13 @@ target_link_libraries(${PROJECT_NAME}
   ${CATKIN_DEVEL_PREFIX}/lib/libopencv_core${CMAKE_SHARED_LIBRARY_SUFFIX})
 
 cs_install()
+install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/opencv2
+  DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.hpp"
+  PATTERN "*.h"
+  PATTERN ".svn" EXCLUDE
+)
+
 
 cs_export(
   INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include
