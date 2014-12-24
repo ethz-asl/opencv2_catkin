@@ -10,7 +10,7 @@ include(ExternalProject)
 file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
 ExternalProject_Add(opencv2_src
-  URL http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.9/opencv-2.4.9.zip
+  URL https://github.com/ethz-asl/thirdparty_library_binaries/raw/master/opencv-2.4.9.zip
   UPDATE_COMMAND ""
   PATCH_COMMAND cd ../opencv2_src/ && patch -N modules/legacy/src/calibfilter.cpp ${CMAKE_CURRENT_SOURCE_DIR}/fix_warnings.patch
   CONFIGURE_COMMAND cd ../opencv2_src && cmake -D WITH_TBB=ON
