@@ -19,7 +19,8 @@ ExternalProject_Add(opencv2_src
     -DWITH_QT=ON -D WITH_OPENGL=ON -D WITH_VTK=ON
     -DENABLE_PRECOMPILED_HEADERS=OFF
     -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX} -DBUILD_SHARED_LIBS=ON 
-    -DWITH_CUDA=OFF -DBUILD_opencv_gpu=OFF .
+    -DWITH_CUDA=OFF -DBUILD_opencv_gpu=OFF -DBUILD_opencv_ts=OFF 
+    -DBUILD_TESTS=OFF -DBUILD_opencv_ts=OFF .
   BUILD_COMMAND cd ../opencv2_src && make -j8
   INSTALL_COMMAND cd ../opencv2_src && make install -j8
 )
