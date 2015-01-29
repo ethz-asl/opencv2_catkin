@@ -9,17 +9,35 @@ include(ExternalProject)
 
 file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
+# Clang on Ubuntu has problems with QT.
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+	set(QT "OFF")
+else (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+	set(QT "ON")
+endif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+
 ExternalProject_Add(opencv2_src
   URL https://github.com/ethz-asl/thirdparty_library_binaries/raw/master/opencv-2.4.9.zip
   UPDATE_COMMAND ""
   PATCH_COMMAND cd ../opencv2_src/ && patch -N modules/legacy/src/calibfilter.cpp ${CMAKE_CURRENT_SOURCE_DIR}/fix_warnings.patch
-  CONFIGURE_COMMAND cd ../opencv2_src && cmake -D WITH_TBB=ON
-    -DBUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=OFF
-    -DINSTALL_PYTHON_EXAMPLES=OFF -D BUILD_EXAMPLES=OFF
-    -DWITH_QT=ON -D WITH_OPENGL=ON -D WITH_VTK=ON
+  CONFIGURE_COMMAND cd ../opencv2_src && cmake 
+    -DWITH_TBB=ON
+    -DBUILD_NEW_PYTHON_SUPPORT=ON 
+    -DWITH_V4L=ON 
+    -DINSTALL_C_EXAMPLES=OFF
+    -DINSTALL_PYTHON_EXAMPLES=OFF 
+    -DBUILD_EXAMPLES=OFF
+    -DWITH_QT=${QT}
+    -DWITH_OPENGL=ON 
+    -DWITH_VTK=ON
     -DENABLE_PRECOMPILED_HEADERS=OFF
-    -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX} -DBUILD_SHARED_LIBS=ON 
-    -DWITH_CUDA=OFF -DBUILD_opencv_gpu=OFF .
+    -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX} 
+    -DBUILD_SHARED_LIBS=ON 
+    -DWITH_CUDA=OFF 
+    -DWITH_OPENCL=OFF
+    -DBUILD_opencv_gpu=OFF 
+    -DBUILD_opencv_ts=OFF 
+    -DBUILD_TESTS=OFF -DBUILD_opencv_ts=OFF .
   BUILD_COMMAND cd ../opencv2_src && make -j8
   INSTALL_COMMAND cd ../opencv2_src && make install -j8
 )
@@ -36,7 +54,6 @@ install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/opencv2
   PATTERN "*.h"
   PATTERN ".svn" EXCLUDE
 )
-
 
 cs_export(
   INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include
