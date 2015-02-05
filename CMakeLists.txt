@@ -9,13 +9,6 @@ include(ExternalProject)
 
 file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
-# Clang on Ubuntu has problems with QT.
-if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-	set(QT "OFF")
-else (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-	set(QT "ON")
-endif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-
 ExternalProject_Add(opencv2_src
   URL https://github.com/ethz-asl/thirdparty_library_binaries/raw/master/opencv-2.4.9.zip
   UPDATE_COMMAND ""
@@ -27,7 +20,7 @@ ExternalProject_Add(opencv2_src
     -DINSTALL_C_EXAMPLES=OFF
     -DINSTALL_PYTHON_EXAMPLES=OFF 
     -DBUILD_EXAMPLES=OFF
-    -DWITH_QT=${QT}
+    -DWITH_QT=OFF # Needed by clang under Ubuntu 14.04 and GTK_WIDGET(cvGetWindowHandle(...)) with gcc (image_view) 
     -DWITH_OPENGL=ON 
     -DWITH_VTK=ON
     -DENABLE_PRECOMPILED_HEADERS=OFF
