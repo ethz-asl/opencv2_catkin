@@ -10,7 +10,7 @@ include(ExternalProject)
 file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
 ExternalProject_Add(opencv2_src
-  URL http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.11/opencv-2.4.11.zip
+  URL https://github.com/Itseez/opencv/archive/2.4.11.zip
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND cd ../opencv2_src && cmake 
     -DWITH_TBB=ON
