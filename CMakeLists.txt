@@ -10,7 +10,7 @@ include(ExternalProject)
 file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
 ExternalProject_Add(opencv2_src
-  DOWNLOAD_COMMAND wget --retry-connrefused --waitretry=1 --timeout=12 --tries 10 http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.11/opencv-2.4.11.zip
+  DOWNLOAD_COMMAND wget --retry-connrefused --waitretry=1 --timeout=40 --tries 3 http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.11/opencv-2.4.11.zip
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND cd ../opencv2_src && cmake 
     -DWITH_TBB=ON
