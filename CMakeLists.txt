@@ -12,6 +12,7 @@ file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 ExternalProject_Add(opencv2_src
   URL https://github.com/Itseez/opencv/archive/2.4.11.zip
   UPDATE_COMMAND ""
+    PATCH_COMMAND cd ../opencv2_src/ && patch -p1 < ${CMAKE_CURRENT_SOURCE_DIR}/compile_with_vtk7.patch
   CONFIGURE_COMMAND cd ../opencv2_src && cmake 
     -DWITH_TBB=ON
     -DBUILD_NEW_PYTHON_SUPPORT=ON 
