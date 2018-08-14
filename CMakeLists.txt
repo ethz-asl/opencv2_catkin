@@ -27,6 +27,7 @@ ExternalProject_Add(opencv2_src
     -DBUILD_SHARED_LIBS=ON 
     -DWITH_CUDA=OFF 
     -DWITH_OPENCL=OFF
+    -DWITH_FFMPEG=OFF
     -DBUILD_opencv_gpu=OFF 
     -DBUILD_opencv_ts=OFF 
     -DBUILD_TESTS=OFF -DBUILD_opencv_ts=OFF .
